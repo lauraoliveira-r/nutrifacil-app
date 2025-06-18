@@ -24,6 +24,7 @@
 
 ## 📁 Estrutura
 ```md
+📁 Estrutura
 plano_alimentar_app/
 ├── frontend/
 │   ├── src/
@@ -44,6 +45,11 @@ plano_alimentar_app/
 │   ├── models/
 │   ├── controllers/
 │   └── config/
+├── tests/  
+│   ├── funcionalidades.md
+│   └── usabilidade.md
+├── slides/ 
+│   ├── Nutrifacil.pdf
 └── README.md
 ```
 ---
