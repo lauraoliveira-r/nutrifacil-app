@@ -1,55 +1,109 @@
-# Plano Alimentar App
+# 🥗 NutriFácil
 
-Este projeto é uma aplicação React chamada "plano_alimentar_app", que utiliza Tailwind CSS para estilização. O objetivo da aplicação é fornecer um plano alimentar de forma interativa e amigável.
+![License](https://img.shields.io/badge/license-MIT-green)
+![Tech](https://img.shields.io/badge/feito%20com-React%20%7C%20Node.js-blue)
 
-## Estrutura do Projeto
+**NutriFácil** é uma aplicação web criada para facilitar o planejamento alimentar com base no perfil do usuário. O app oferece planos alimentares personalizados, cálculo de metas nutricionais e sugestões de receitas, promovendo hábitos saudáveis de forma prática.
 
-A estrutura do projeto é a seguinte:
+---
 
+## 🧠 Funcionalidades
+> Cadastro de perfil alimentar
+
+> Geração automática de plano nutricional
+
+> Cálculo de TMB, IMC e ingestão diária de água
+
+> Sugestões de alimentos e receitas
+
+> Acompanhamento de ingestão calórica e hídrica
+
+> Recomendação de exercícios físicos
+
+---
+
+## 📁 Estrutura
+```md
+📁 Estrutura
+plano_alimentar_app/
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── styles/
+│   │   └── types/
+│   ├── public/
+│   ├── package.json
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
+│   └── tsconfig.json
+├── backend/
+│   ├── server.js / app.js
+│   ├── routes/
+│   ├── models/
+│   ├── controllers/
+│   └── config/
+├── tests/  
+│   ├── funcionalidades.md
+│   └── usabilidade.md
+├── slides/ 
+│   ├── Nutrifacil.pdf
+└── README.md
 ```
-plano_alimentar_app
-├── src
-│   ├── App.tsx          # Componente principal da aplicação
-│   ├── index.tsx        # Ponto de entrada da aplicação
-│   ├── components        # Componentes reutilizáveis
-│   │   └── index.ts
-│   ├── pages            # Páginas da aplicação
-│   │   └── Home.tsx     # Página inicial
-│   ├── styles           # Estilos da aplicação
-│   │   └── tailwind.css  # Configurações do Tailwind CSS
-│   └── types            # Tipos e interfaces
-│       └── index.ts
-├── public
-│   └── index.html       # Template HTML da aplicação
-├── package.json         # Configuração do npm
-├── tailwind.config.js   # Configuração do Tailwind CSS
-├── postcss.config.js    # Configuração do PostCSS
-├── tsconfig.json        # Configuração do TypeScript
-└── README.md            # Documentação do projeto
-```
+---
 
-## Instalação
+## 🚀 Instalação e Uso
 
-Para instalar as dependências do projeto, execute o seguinte comando:
+### 🔧 Pré-requisitos
 
-```
+- Node.js
+- MongoDB
+
+### ▶️ Rodar o Frontend
+
+```bash
+cd frontend
 npm install
+npm run dev
 ```
+### ▶️ Rodar o Backend
 
-## Uso
-
-Para iniciar a aplicação em modo de desenvolvimento, utilize o comando:
-
+```bash
+cd backend
+npm install
+# .env deve conter MONGODB_URI e PORT
+npm run dev
 ```
-npm start
-```
+Acesse a aplicação em: [http://localhost:3000](http://localhost:3000)
 
-A aplicação estará disponível em `http://localhost:3000`.
+## 
+---
+## 🛠️ Tecnologias
 
-## Contribuição
+### Frontend
 
-Sinta-se à vontade para contribuir com melhorias e correções. Para isso, faça um fork do repositório e envie um pull request.
+- React  
+- TypeScript  
+- Vite  
+- Tailwind CSS
 
-## Licença
+### Backend
 
-Este projeto está licenciado sob a MIT License.
+- Node.js  
+- Express  
+- MongoDB  
+- Mongoose
+---
+## 👥 Equipe
+
+| Nome                        | RA        |
+|-----------------------------|-----------|
+| Laura Oliveira Rodrigues    | 422141258 |
+| Eduarda Alves Dutra         | 42210335  |
+| Raphael Yuri Gomes da Silva | 422136008 |
+---
+## ⚖️ Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).

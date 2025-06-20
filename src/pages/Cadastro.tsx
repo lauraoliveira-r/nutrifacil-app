@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const Cadastro: React.FC = () => {
+interface CadastroProps {
+  onCadastroSucesso: () => void;
+}
+
+const Cadastro: React.FC<CadastroProps> = ({ onCadastroSucesso }) => {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [cpf, setCpf] = useState("");
@@ -35,6 +39,13 @@ const Cadastro: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Chama a validação do CPF antes de enviar
+        if (!validarCPF(cpf)) {
+            alert("CPF inválido!");
+            return;
+        }
+
         const dados = {
             nome,
             email,
@@ -58,13 +69,48 @@ const Cadastro: React.FC = () => {
             });
             if (response.ok) {
                 alert('Cadastro realizado com sucesso!');
+                onCadastroSucesso(); // Redireciona para login
             } else {
-                alert('Erro ao cadastrar.');
+                let erroMsg = 'Erro ao cadastrar.';
+                try {
+                    const erro = await response.json();
+                    if (erro && erro.mensagem) {
+                        erroMsg = erro.mensagem;
+                    }
+                } catch (e) {
+                    // Se não for possível ler o JSON, mantém mensagem padrão
+                }
+                alert(erroMsg);
             }
         } catch (error) {
             alert('Erro ao conectar com o servidor.');
         }
     };
+
+    function maskCPF(value: string) {
+      return value
+        .replace(/\D/g, "") // Remove tudo que não é dígito
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+        .slice(0, 14); // Limita ao tamanho do CPF formatado
+    }
+
+    function validarCPF(cpf: string) {
+      cpf = cpf.replace(/[^\d]+/g, '');
+      if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+      let soma = 0, resto;
+      for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+      resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+      if (resto !== parseInt(cpf.substring(9, 10))) return false;
+      soma = 0;
+      for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+      resto = (soma * 10) % 11;
+      if (resto === 10 || resto === 11) resto = 0;
+      if (resto !== parseInt(cpf.substring(10, 11))) return false;
+      return true;
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -83,7 +129,15 @@ const Cadastro: React.FC = () => {
                 </div>
                 <div className="mb-3">
                     <label className="block mb-1">CPF</label>
-                    <input type="text" className="w-full border rounded px-3 py-2" value={cpf} onChange={e => setCpf(e.target.value)} required />
+                    <input
+                      type="text"
+                      value={cpf}
+                      onChange={e => setCpf(maskCPF(e.target.value))}
+                      maxLength={14}
+                      placeholder="CPF"
+                      className="w-full border rounded px-3 py-2"
+                      required
+                    />
                 </div>
                 <div className="mb-3 flex gap-2">
                     <div className="flex-1">
@@ -149,8 +203,18 @@ const Cadastro: React.FC = () => {
                     <label className="block mb-1">Senha</label>
                     <input type="password" className="w-full border rounded px-3 py-2" value={senha} onChange={e => setSenha(e.target.value)} required />
                 </div>
-                <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
-                    Cadastrar
+                <button
+                  type="submit"
+                  className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition w-full mt-4"
+                >
+                  Cadastrar
+                </button>
+                <button
+                  type="button"
+                  className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition w-full mt-2"
+                  onClick={onCadastroSucesso}
+                >
+                  Voltar para o login
                 </button>
             </form>
         </div>
