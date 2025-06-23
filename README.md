@@ -95,14 +95,7 @@ Acesse a aplicação em: [http://localhost:3000](http://localhost:3000)
 - Express  
 - MongoDB  
 - Mongoose
----
-## 👥 Equipe
 
-| Nome                        | RA        |
-|-----------------------------|-----------|
-| Laura Oliveira Rodrigues    | 422141258 |
-| Eduarda Alves Dutra         | 42210335  |
-| Raphael Yuri Gomes da Silva | 422136008 |
 ---
 ## ⚖️ Licença
 
